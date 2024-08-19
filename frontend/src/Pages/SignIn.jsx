@@ -1,5 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Signing in with:', email, password);
+    navigate('/dashboard');
+  };
+
   return (
     <div
       style={{ animation: 'slideInFromLeft 1s ease-out' }}
@@ -17,7 +30,7 @@ const SignIn = () => {
       >
         Sign in to your account
       </p>
-      <form method="POST" action="#" className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div className="relative">
           <input
             placeholder="john@example.com"
@@ -26,6 +39,8 @@ const SignIn = () => {
             id="email"
             name="email"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <label
             className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
@@ -42,6 +57,8 @@ const SignIn = () => {
             id="password"
             name="password"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <label
             className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
